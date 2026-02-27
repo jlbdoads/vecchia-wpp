@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionando para WhatsApp - Vecchia Milano</title>
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Substitua pelo seu ID do Pixel
+    fbq('init', 'SEU_ID_DO_PIXEL'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=SEU_ID_DO_PIXEL&ev=PageView&noscript=1"
+    /></noscript>
+    
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            padding-top: 50px; 
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .loader { 
+            margin: 20px auto; 
+            border: 5px solid #333; 
+            border-top: 5px solid #C9A227; 
+            border-radius: 50%; 
+            width: 50px; 
+            height: 50px; 
+            animation: spin 1s linear infinite; 
+        }
+        
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+        
+        p { 
+            color: #fff; 
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        .subtitle {
+            color: #C9A227 !important;
+            font-size: 14px !important;
+            margin-top: 20px !important;
+        }
+        
+        a {
+            color: #C9A227;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo Vecchia Milano -->
+    <img src="https://vecchiamilano.com.br/images/logo.png" alt="Vecchia Milano" class="logo">
+    
+    <div class="loader"></div>
+    <p>Aguarde, redirecionando para o WhatsApp...</p>
+    <p class="subtitle">Vecchia Milano - A escolha natural dos verdadeiros cavalheiros</p>
+    
+    <p style="font-size: 12px; margin-top: 30px;">
+        Se não for redirecionado automaticamente, <a id="whatsapp-link" href="#">clique aqui</a>.
+    </p>
+
+    <script>
+        // Número de telefone do WhatsApp (sem +)
+        const phoneNumber = '5544999934929';
+        
+        // Obtém o código do produto da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productCode = urlParams.get('cod');
+        
+        // Mensagem base
+        let message = 'Olá, gostaria de mais informações sobre os produtos da Vecchia Milano.';
+        
+        // Se tiver código do produto, adiciona à mensagem
+        if (productCode) {
+            message = 'Olá, gostaria de mais informações sobre o produto de código: ' + productCode + '.';
+        }
+        
+        // Codifica a mensagem para URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Monta o link do WhatsApp
+        const whatsappLink = 'https://wa.me/' + phoneNumber + '?text=' + encodedMessage;
+        
+        // Atualiza o link de fallback
+        document.getElementById('whatsapp-link').href = whatsappLink;
+        
+        // Função de Redirecionamento
+        function redirect() {
+            window.location.href = whatsappLink;
+        }
+        
+        // Dispara evento do Pixel e redireciona após 1.5 segundos
+        setTimeout(redirect, 1500);
+    </script>
+
+</body>
+</html>
